@@ -7,9 +7,25 @@
 import { arrayToDict, splitFirst, invertMapping } from "./utils";
 import { JSON_FORMAT, MIN_FREQ } from "../config";
 
+import { wordFreqsRaw, dictionaryRaw, componentsRaw } from "../config";
+
+import {
+	wordFreqsFile,
+	charFreqsFile,
+	simplifiedDictionaryFile,
+	traditionalDictionaryFile,
+	mergedDictionaryFile,
+	charToWordsFile,
+	simplifiedTraditionalFile,
+	componentsFile,
+	componentsToCharacterFile,
+} from "../config";
+
 var legacy = require("legacy-encoding");
 var read = require("read-file");
 var jsonfile = require("jsonfile");
+
+const DATA_DIR = "../data";
 
 /**
  * Handler for extracting word frequency estimates
@@ -226,30 +242,24 @@ function processComponents(filename) {
 	return componentsDictionary;
 }
 
+function toJSON(path, obj) {
+	jsonfile.writeFile(path, obj, JSON_FORMAT, function(err) {
+		if (err) console.error(err);
+	});
+}
+
 // process word frequencies
-var [wordFreqs, charFreqs] = processWordFreqs(
-	"../data/raw/BCC_LEX_Zh/weibo_wordfreq.release.txt"
-);
+var [wordFreqs, charFreqs] = processWordFreqs(`${DATA_DIR}/${wordFreqsRaw}`);
 
 wordFreqs = processFreqs(wordFreqs);
-
-const wordFreqsFile = "../data/processed/wordFreqs.json";
-
-jsonfile.writeFile(wordFreqsFile, wordFreqs, JSON_FORMAT, function(err) {
-	if (err) console.error(err);
-});
+toJSON(`${DATA_DIR}/${wordFreqsFile}`, wordFreqs);
 
 charFreqs = processFreqs(charFreqs);
-
-const charFreqsFile = "../data/processed/charFreqs.json";
-
-jsonfile.writeFile(charFreqsFile, charFreqs, JSON_FORMAT, function(err) {
-	if (err) console.error(err);
-});
+toJSON(`${DATA_DIR}/${charFreqsFile}`, charFreqs);
 
 // process dictionaries
 var [simplifiedDictionary, traditionalDictionary] = processDictionary(
-	"../data/raw/cedict_1_0_ts_utf-8_mdbg.txt"
+	`${DATA_DIR}/${dictionaryRaw}`
 );
 
 var mergedDictionary = Object.assign(
@@ -258,81 +268,21 @@ var mergedDictionary = Object.assign(
 	traditionalDictionary
 );
 
-const simplifiedDictionaryFile = "../data/processed/simplifiedDictionary.json";
-const traditionalDictionaryFile =
-	"../data/processed/traditionalDictionary.json";
-const mergedDictionaryFile = "../data/processed/mergedDictionary.json";
-
-jsonfile.writeFile(
-	simplifiedDictionaryFile,
-	simplifiedDictionary,
-	JSON_FORMAT,
-	function(err) {
-		if (err) console.error(err);
-	}
-);
-
-jsonfile.writeFile(
-	traditionalDictionaryFile,
-	traditionalDictionary,
-	JSON_FORMAT,
-	function(err) {
-		if (err) console.error(err);
-	}
-);
-
-jsonfile.writeFile(
-	mergedDictionaryFile,
-	mergedDictionary,
-	JSON_FORMAT,
-	function(err) {
-		if (err) console.error(err);
-	}
-);
+toJSON(`${DATA_DIR}/${simplifiedDictionaryFile}`, simplifiedDictionary);
+toJSON(`${DATA_DIR}/${traditionalDictionaryFile}`, traditionalDictionary);
+toJSON(`${DATA_DIR}/${mergedDictionaryFile}`, mergedDictionary);
 
 // characters to words mapping
 var charToWords = makeCharToWords(Object.keys(mergedDictionary));
-
-const charToWordsFile = "../data/processed/charToWords.json";
-
-jsonfile.writeFile(charToWordsFile, charToWords, JSON_FORMAT, function(err) {
-	if (err) console.error(err);
-});
+toJSON(`${DATA_DIR}/${charToWordsFile}`, charToWords);
 
 // simplified or traditional map
 var simplifiedTraditional = makeSimplifiedTraditional(simplifiedDictionary);
-
-const simplifiedTraditionalFile =
-	"../data/processed/simplifiedTraditional.json";
-
-jsonfile.writeFile(
-	simplifiedTraditionalFile,
-	simplifiedTraditional,
-	JSON_FORMAT,
-	function(err) {
-		if (err) console.error(err);
-	}
-);
+toJSON(`${DATA_DIR}/${simplifiedTraditionalFile}`, simplifiedTraditional);
 
 // process character components
-var components = processComponents("../data/raw/cjk-decomp.txt");
-
-const componentsFile = "../data/processed/components.json";
-
-jsonfile.writeFile(componentsFile, components, JSON_FORMAT, function(err) {
-	if (err) console.error(err);
-});
+var components = processComponents(`${DATA_DIR}/${componentsRaw}`);
+toJSON(`${DATA_DIR}/${componentsFile}`, components);
 
 var componentsToCharacter = invertMapping(components);
-
-const componentsToCharacterFile =
-	"../data/processed/componentsToCharacter.json";
-
-jsonfile.writeFile(
-	componentsToCharacterFile,
-	componentsToCharacter,
-	JSON_FORMAT,
-	function(err) {
-		if (err) console.error(err);
-	}
-);
+toJSON(`${DATA_DIR}/${componentsToCharacterFile}`, componentsToCharacter);
