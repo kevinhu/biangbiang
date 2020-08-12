@@ -68,6 +68,7 @@ function processFreqs(freqDict) {
 		}
 
 		freqDict[key] = {
+			symbol: key,
 			index: index,
 			frequency: freq,
 			percentage: percentage,
