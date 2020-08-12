@@ -228,7 +228,7 @@ function processComponents(filename) {
 
 // process word frequencies
 var [wordFreqs, charFreqs] = processWordFreqs(
-	"../data/raw/BCC_LEX_Zh/global_wordfreq.release.txt"
+	"../data/raw/BCC_LEX_Zh/weibo_wordfreq.release.txt"
 );
 
 wordFreqs = processFreqs(wordFreqs);
