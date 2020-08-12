@@ -229,12 +229,12 @@ function processComponents(filename) {
 
 // process word frequencies
 var [wordFreqs, charFreqs] = processWordFreqs(
-	"./data/raw/BCC_LEX_Zh/global_wordfreq.release.txt"
+	"../data/raw/BCC_LEX_Zh/global_wordfreq.release.txt"
 );
 
 wordFreqs = processFreqs(wordFreqs);
 
-const wordFreqsFile = "./data/processed/wordFreqs.json";
+const wordFreqsFile = "../data/processed/wordFreqs.json";
 
 jsonfile.writeFile(wordFreqsFile, wordFreqs, JSON_FORMAT, function(err) {
 	if (err) console.error(err);
@@ -242,7 +242,7 @@ jsonfile.writeFile(wordFreqsFile, wordFreqs, JSON_FORMAT, function(err) {
 
 charFreqs = processFreqs(charFreqs);
 
-const charFreqsFile = "./data/processed/charFreqs.json";
+const charFreqsFile = "../data/processed/charFreqs.json";
 
 jsonfile.writeFile(charFreqsFile, charFreqs, JSON_FORMAT, function(err) {
 	if (err) console.error(err);
@@ -250,7 +250,7 @@ jsonfile.writeFile(charFreqsFile, charFreqs, JSON_FORMAT, function(err) {
 
 // process dictionaries
 var [simplifiedDictionary, traditionalDictionary] = processDictionary(
-	"./data/raw/cedict_1_0_ts_utf-8_mdbg.txt"
+	"../data/raw/cedict_1_0_ts_utf-8_mdbg.txt"
 );
 
 var mergedDictionary = Object.assign(
@@ -259,9 +259,9 @@ var mergedDictionary = Object.assign(
 	traditionalDictionary
 );
 
-const simplifiedDictionaryFile = "./data/processed/simplifiedDictionary.json";
-const traditionalDictionaryFile = "./data/processed/traditionalDictionary.json";
-const mergedDictionaryFile = "./data/processed/mergedDictionary.json";
+const simplifiedDictionaryFile = "../data/processed/simplifiedDictionary.json";
+const traditionalDictionaryFile = "../data/processed/traditionalDictionary.json";
+const mergedDictionaryFile = "../data/processed/mergedDictionary.json";
 
 jsonfile.writeFile(
 	simplifiedDictionaryFile,
@@ -293,7 +293,7 @@ jsonfile.writeFile(
 // characters to words mapping
 var charToWords = makeCharToWords(Object.keys(mergedDictionary));
 
-const charToWordsFile = "./data/processed/charToWords.json";
+const charToWordsFile = "../data/processed/charToWords.json";
 
 jsonfile.writeFile(charToWordsFile, charToWords, JSON_FORMAT, function(err) {
 	if (err) console.error(err);
@@ -302,7 +302,7 @@ jsonfile.writeFile(charToWordsFile, charToWords, JSON_FORMAT, function(err) {
 // simplified or traditional map
 var simplifiedTraditional = makeSimplifiedTraditional(simplifiedDictionary);
 
-const simplifiedTraditionalFile = "./data/processed/simplifiedTraditional.json";
+const simplifiedTraditionalFile = "../data/processed/simplifiedTraditional.json";
 
 jsonfile.writeFile(
 	simplifiedTraditionalFile,
@@ -314,9 +314,9 @@ jsonfile.writeFile(
 );
 
 // process character components
-var components = processComponents("./data/raw/cjk-decomp.txt");
+var components = processComponents("../data/raw/cjk-decomp.txt");
 
-const componentsFile = "./data/processed/components.json";
+const componentsFile = "../data/processed/components.json";
 
 jsonfile.writeFile(componentsFile, components, JSON_FORMAT, function(err) {
 	if (err) console.error(err);
@@ -324,7 +324,7 @@ jsonfile.writeFile(componentsFile, components, JSON_FORMAT, function(err) {
 
 var componentsToCharacter = invertMapping(components);
 
-const componentsToCharacterFile = "./data/processed/componentsToCharacter.json";
+const componentsToCharacterFile = "../data/processed/componentsToCharacter.json";
 
 jsonfile.writeFile(
 	componentsToCharacterFile,
