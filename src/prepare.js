@@ -5,13 +5,11 @@
 // CJK-decomp: https://github.com/amake/cjk-decomp
 
 import { arrayToDict, splitFirst, invertMapping } from "./utils";
+import { JSON_FORMAT, MIN_FREQ } from "../config";
 
 var legacy = require("legacy-encoding");
 var read = require("read-file");
 var jsonfile = require("jsonfile");
-
-const JSON_FORMAT = { spaces: 4, EOL: "\n" };
-const MIN_FREQ = 10000;
 
 /**
  * Handler for extracting word frequency estimates
@@ -260,7 +258,8 @@ var mergedDictionary = Object.assign(
 );
 
 const simplifiedDictionaryFile = "../data/processed/simplifiedDictionary.json";
-const traditionalDictionaryFile = "../data/processed/traditionalDictionary.json";
+const traditionalDictionaryFile =
+	"../data/processed/traditionalDictionary.json";
 const mergedDictionaryFile = "../data/processed/mergedDictionary.json";
 
 jsonfile.writeFile(
@@ -302,7 +301,8 @@ jsonfile.writeFile(charToWordsFile, charToWords, JSON_FORMAT, function(err) {
 // simplified or traditional map
 var simplifiedTraditional = makeSimplifiedTraditional(simplifiedDictionary);
 
-const simplifiedTraditionalFile = "../data/processed/simplifiedTraditional.json";
+const simplifiedTraditionalFile =
+	"../data/processed/simplifiedTraditional.json";
 
 jsonfile.writeFile(
 	simplifiedTraditionalFile,
@@ -324,7 +324,8 @@ jsonfile.writeFile(componentsFile, components, JSON_FORMAT, function(err) {
 
 var componentsToCharacter = invertMapping(components);
 
-const componentsToCharacterFile = "../data/processed/componentsToCharacter.json";
+const componentsToCharacterFile =
+	"../data/processed/componentsToCharacter.json";
 
 jsonfile.writeFile(
 	componentsToCharacterFile,

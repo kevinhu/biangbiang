@@ -2,7 +2,7 @@
 // sentence-level statistics
 // component to characters
 
-import {arrayToDict} from "./utils";
+import { arrayToDict } from "./utils";
 
 const wordFreqs = require("./data/processed/wordFreqs.json");
 const charFreqs = require("./data/processed/charFreqs.json");
@@ -73,5 +73,3 @@ console.log(wordFrequency("斩"));
 console.log(wordsContaining("斬"));
 console.log(kind("斬"));
 console.log(kind("斩"));
-
-
