@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "prepare": "cd src && node -r esm prepare.js"
+  },
   "dependencies": {
     "core-js": "^3.6.5",
     "esm": "^3.2.25",

@@ -211,10 +211,6 @@ function makeSimplifiedTraditional(simplifiedDictionary) {
 function componentsToArray(componentsString) {
 	var componentsString = splitFirst(componentsString, "(", 2)[1];
 
-	if (componentsString.charAt(componentsString.length - 1) != ")") {
-		console.log("Malformed components string.", componentsString);
-	}
-
 	componentsString = componentsString.slice(0, -1);
 	componentsString = componentsString.split(",");
 
@@ -233,6 +229,9 @@ function processComponents(filename) {
 
 	var fileArray = fileString.split("\n");
 
+	// ignore last newline
+	fileArray = fileArray.slice(0, -1);
+
 	fileArray = fileArray.map((x) => splitFirst(x, ":", 1));
 
 	// prepare array for conversion to dictionary
@@ -242,6 +241,11 @@ function processComponents(filename) {
 	return componentsDictionary;
 }
 
+/**
+ * Wrapper for exporting an object to JSON.
+ * @param {String} path
+ * @param {Object} obj
+ */
 function toJSON(path, obj) {
 	jsonfile.writeFile(path, obj, JSON_FORMAT, function(err) {
 		if (err) console.error(err);
@@ -249,15 +253,19 @@ function toJSON(path, obj) {
 }
 
 // process word frequencies
+console.log("Processing word frequencies");
 var [wordFreqs, charFreqs] = processWordFreqs(`${DATA_DIR}/${wordFreqsRaw}`);
 
 wordFreqs = processFreqs(wordFreqs);
 toJSON(`${DATA_DIR}/${wordFreqsFile}`, wordFreqs);
+console.log("\tMade word frequency map");
 
 charFreqs = processFreqs(charFreqs);
 toJSON(`${DATA_DIR}/${charFreqsFile}`, charFreqs);
+console.log("\tMade character frequency map");
 
 // process dictionaries
+console.log("Processing dictionaries");
 var [simplifiedDictionary, traditionalDictionary] = processDictionary(
 	`${DATA_DIR}/${dictionaryRaw}`
 );
@@ -269,20 +277,28 @@ var mergedDictionary = Object.assign(
 );
 
 toJSON(`${DATA_DIR}/${simplifiedDictionaryFile}`, simplifiedDictionary);
+console.log("\tMade simplified dictionary");
 toJSON(`${DATA_DIR}/${traditionalDictionaryFile}`, traditionalDictionary);
+console.log("\tMade traditional dictionary");
 toJSON(`${DATA_DIR}/${mergedDictionaryFile}`, mergedDictionary);
+console.log("\tMade merged dictionary");
 
 // characters to words mapping
 var charToWords = makeCharToWords(Object.keys(mergedDictionary));
 toJSON(`${DATA_DIR}/${charToWordsFile}`, charToWords);
+console.log("\tMade character -> word map");
 
 // simplified or traditional map
 var simplifiedTraditional = makeSimplifiedTraditional(simplifiedDictionary);
 toJSON(`${DATA_DIR}/${simplifiedTraditionalFile}`, simplifiedTraditional);
+console.log("\tMade simplified/traditional map");
 
 // process character components
+console.log("Processing character components");
 var components = processComponents(`${DATA_DIR}/${componentsRaw}`);
 toJSON(`${DATA_DIR}/${componentsFile}`, components);
+console.log("\tMade character to components map");
 
 var componentsToCharacter = invertMapping(components);
 toJSON(`${DATA_DIR}/${componentsToCharacterFile}`, componentsToCharacter);
+console.log("\tMade component to characters map");
