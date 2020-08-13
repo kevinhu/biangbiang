@@ -3,6 +3,8 @@ import { arrayToDict } from './utils';
 import * as components from '../data/processed/components.json';
 import * as componentsToCharacter from '../data/processed/componentsToCharacter.json';
 
+import { CharacterError } from './errors';
+
 /**
  * Get the component tree of a character or component.
  * @param {String} character
@@ -10,6 +12,10 @@ import * as componentsToCharacter from '../data/processed/componentsToCharacter.
  * @return {Dictionary}
  */
 export function decompose(character, depth) {
+  if (character.length > 1) {
+    throw new CharacterError('Input is not a character', 404);
+  }
+
   if (!(character in components)) {
     return { [character]: character };
   }
@@ -35,6 +41,10 @@ export function decompose(character, depth) {
  * @return {Array}
  */
 export function charactersWithComponent(component) {
+  if (component.length > 1) {
+    throw new CharacterError('Input is not a character', 404);
+  }
+
   if (component in componentsToCharacter) {
     return componentsToCharacter[component];
   } else {

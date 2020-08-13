@@ -6,6 +6,8 @@ import * as charToWords from '../data/processed/charToWords.json';
 
 import * as simplifiedTraditional from '../data/processed/simplifiedTraditional.json';
 
+import { CharacterError } from './errors';
+
 /**
  * Dictionary errors object
  */
@@ -85,6 +87,10 @@ export function kind(character) {
  * @return {Array}
  */
 export function wordsContaining(character) {
+  if (character.length > 1) {
+    throw new CharacterError('Input is not a character', 404);
+  }
+
   if (character in charToWords) {
     return charToWords[character];
   } else {

@@ -1,12 +1,17 @@
 import * as wordFreqs from '../data/processed/wordFreqs.json';
 import * as charFreqs from '../data/processed/charFreqs.json';
 
+import { CharacterError } from './errors';
+
 /**
  * Get character frequency statistics.
  * @param {String} character
  * @return {Dictionary}
  */
 export function characterFrequency(character) {
+  if (character.length > 1) {
+    throw new CharacterError('Input is not a character', 404);
+  }
   if (character in charFreqs) {
     return charFreqs[character];
   } else {
