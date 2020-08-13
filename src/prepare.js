@@ -317,5 +317,20 @@ toJSON(`${DATA_DIR}/${componentsFile}`, components);
 console.log('\tMade character -> components map');
 
 const componentsToCharacter = invertMapping(components);
+
+Object.keys(componentsToCharacter).map(function (key) {
+  const characters = componentsToCharacter[key];
+
+  const indexedCharacters = characters.map(function (character) {
+    if (character in charFreqs) {
+      return { character: character, index: charFreqs[character]['index'] };
+    } else {
+      return { character: character, index: -1 };
+    }
+  });
+
+  componentsToCharacter[key] = indexedCharacters;
+});
+
 toJSON(`${DATA_DIR}/${componentsToCharacterFile}`, componentsToCharacter);
 console.log('\tMade component -> characters map');
