@@ -54,5 +54,21 @@ export function multiFrequency(sentence) {
     characterFrequency(char),
   );
 
-  return charFrequencies;
+  let indices = charFrequencies.map((x) => x['index']);
+  indices = indices.filter((x) => x !== -1);
+
+  let percentages = charFrequencies.map((x) => x['percentage']);
+  percentages = percentages.filter((x) => x !== -1);
+
+  let cumulativePercentages = charFrequencies.map(
+    (x) => x['cumulativePercentage'],
+  );
+  cumulativePercentages = cumulativePercentages.filter((x) => x !== -1);
+
+  return {
+    byCharacter: charFrequencies,
+    indices: indices,
+    percentages: percentages,
+    cumulativePercentages: cumulativePercentages,
+  };
 }
