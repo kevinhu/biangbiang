@@ -1,19 +1,14 @@
-import { define, characterFrequency, multiFrequency } from '../index';
+import { define, kind, wordsContaining } from '../index';
 
 test('define', () => {
-	define('鱼', 'simplified');
+	console.log(define('鱼', 'simplified'));
 });
 
-test('frequency', () => {
-	console.log(characterFrequency('鱼'));
+test('kind', () => {
+	console.log(kind('鱼'));
 });
 
-test('frequency', () => {
-	expect(() => {
-		characterFrequency('not a character');
-	}).toThrow();
+test('wordsContaining', () => {
+	console.log(wordsContaining('鱼'));
 });
 
-test('sentence statistics', () => {
-	console.log(multiFrequency('我喜欢吃西红柿鸡蛋炒米饭。'));
-});

@@ -12,10 +12,6 @@ import { CharacterError } from './errors';
  * @return {Dictionary}
  */
 export function decompose(character, depth) {
-  if (character.length > 1) {
-    throw new CharacterError('Input is not a character', 404);
-  }
-
   if (!(character in components)) {
     return { [character]: character };
   }
