@@ -116,9 +116,10 @@ function processDictionaryEntry(entry) {
 /**
  * Handler for compiling simplified and traditional dictionaries
  * @param {String} filename
+ * @param {Dictionary} frequencies
  * @return {Array}
  */
-function processDictionary(filename) {
+function processDictionary(filename, frequencies) {
   const content = read.sync(filename);
 
   const filestring = legacy.decode(content, 'utf-8');
@@ -133,11 +134,23 @@ function processDictionary(filename) {
   // split by simplified-traditional
   let simplifiedDictionary = fileArray.map((x) => [
     x[1],
-    { simplified: x[1], traditional: x[0], pinyin: x[2], definition: x[3] },
+    {
+      simplified: x[1],
+      traditional: x[0],
+      pinyin: x[2],
+      definition: x[3],
+      index: x[1] in frequencies ? frequencies[x[1]]['index'] : -1,
+    },
   ]);
   let traditionalDictionary = fileArray.map((x) => [
     x[0],
-    { simplified: x[1], traditional: x[0], pinyin: x[2], definition: x[3] },
+    {
+      simplified: x[1],
+      traditional: x[0],
+      pinyin: x[2],
+      definition: x[3],
+      index: x[1] in frequencies ? frequencies[x[1]]['index'] : -1,
+    },
   ]);
 
   simplifiedDictionary = arrayToDict(simplifiedDictionary);
@@ -271,6 +284,7 @@ console.log('\tMade character frequency map');
 console.log('Processing dictionaries');
 const [simplifiedDictionary, traditionalDictionary] = processDictionary(
   `${DATA_DIR}/${dictionaryRaw}`,
+  wordFreqs,
 );
 
 const mergedDictionary = Object.assign(
