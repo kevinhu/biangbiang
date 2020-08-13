@@ -297,8 +297,8 @@ console.log("\tMade simplified/traditional map");
 console.log("Processing character components");
 var components = processComponents(`${DATA_DIR}/${componentsRaw}`);
 toJSON(`${DATA_DIR}/${componentsFile}`, components);
-console.log("\tMade character to components map");
+console.log("\tMade character -> components map");
 
 var componentsToCharacter = invertMapping(components);
 toJSON(`${DATA_DIR}/${componentsToCharacterFile}`, componentsToCharacter);
-console.log("\tMade component to characters map");
+console.log("\tMade component -> characters map");
