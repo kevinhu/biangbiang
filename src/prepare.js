@@ -132,12 +132,12 @@ function processDictionary(filename) {
 
 	// split by simplified-traditional
 	var simplifiedDictionary = fileArray.map((x) => [
-		x[0],
-		{ simplified: x[0], traditional: x[1], pinyin: x[2], definition: x[3] },
+		x[1],
+		{ simplified: x[1], traditional: x[0], pinyin: x[2], definition: x[3] },
 	]);
 	var traditionalDictionary = fileArray.map((x) => [
-		x[1],
-		{ simplified: x[0], traditional: x[1], pinyin: x[2], definition: x[3] },
+		x[0],
+		{ simplified: x[1], traditional: x[0], pinyin: x[2], definition: x[3] },
 	]);
 
 	simplifiedDictionary = arrayToDict(simplifiedDictionary);
