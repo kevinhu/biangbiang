@@ -162,21 +162,38 @@ function processDictionary(filename, frequencies) {
 /**
  * Create a map from characters to words from the inverse.
  * @param {Dictionary} words
+ * @param {Dictionary} frequencies
  * @return {Dictionary}
  */
-function makeCharToWords(words) {
+function makeCharToWords(words, frequencies) {
   const charToWords = {};
 
   for (const word of words) {
+    let wordIndex = -1;
+
+    if (word in frequencies) {
+      wordIndex = frequencies[word]['index'];
+    }
+
     const wordChars = Array.from(new Set(word));
     for (const char of wordChars) {
       if (char in charToWords) {
-        charToWords[char].push(word);
+        charToWords[char].push({ word: word, index: wordIndex });
       } else {
-        charToWords[char] = [word];
+        charToWords[char] = [{ word: word, index: wordIndex }];
       }
     }
   }
+
+  Object.keys(charToWords).map(function (key) {
+    let words = charToWords[key];
+
+    words = words.sort(function (a, b) {
+      return a.index > b.index ? 1 : b.index > a.index ? -1 : 0;
+    });
+
+    charToWords[key] = words;
+  });
 
   return charToWords;
 }
@@ -301,7 +318,7 @@ toJSON(`${DATA_DIR}/${mergedDictionaryFile}`, mergedDictionary);
 console.log('\tMade merged dictionary');
 
 // characters to words mapping
-const charToWords = makeCharToWords(Object.keys(mergedDictionary));
+const charToWords = makeCharToWords(Object.keys(mergedDictionary), wordFreqs);
 toJSON(`${DATA_DIR}/${charToWordsFile}`, charToWords);
 console.log('\tMade character -> word map');
 
@@ -321,12 +338,16 @@ const componentsToCharacter = invertMapping(components);
 Object.keys(componentsToCharacter).map(function (key) {
   const characters = componentsToCharacter[key];
 
-  const indexedCharacters = characters.map(function (character) {
+  let indexedCharacters = characters.map(function (character) {
     if (character in charFreqs) {
       return { character: character, index: charFreqs[character]['index'] };
     } else {
       return { character: character, index: -1 };
     }
+  });
+
+  indexedCharacters = indexedCharacters.sort(function (a, b) {
+    return a.index > b.index ? 1 : b.index > a.index ? -1 : 0;
   });
 
   componentsToCharacter[key] = indexedCharacters;
