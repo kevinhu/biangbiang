@@ -4,10 +4,10 @@
  * @return {Dictionary}
  */
 export function arrayToDict(array) {
-	return array.reduce(
-		(dict, [key, value]) => Object.assign(dict, { [key]: value }),
-		{}
-	);
+  return array.reduce(
+    (dict, [key, value]) => Object.assign(dict, { [key]: value }),
+    {},
+  );
 }
 
 /**
@@ -19,12 +19,12 @@ export function arrayToDict(array) {
  * @return {Array}
  */
 export function splitFirst(string, delim, limit) {
-	var arr = string.split(delim);
-	var result = arr.splice(0, limit);
+  const arr = string.split(delim);
+  const result = arr.splice(0, limit);
 
-	result.push(arr.join(delim));
+  result.push(arr.join(delim));
 
-	return result;
+  return result;
 }
 
 /**
@@ -33,19 +33,19 @@ export function splitFirst(string, delim, limit) {
  * @return {Object}
  */
 export function invertMapping(mapping) {
-	var inverted = {};
+  const inverted = {};
 
-	for (const key of Object.keys(mapping)) {
-		var values = mapping[key];
+  for (const key of Object.keys(mapping)) {
+    const values = mapping[key];
 
-		for (const value of values) {
-			if (value in inverted) {
-				inverted[value].push(key);
-			} else {
-				inverted[value] = [key];
-			}
-		}
-	}
+    for (const value of values) {
+      if (value in inverted) {
+        inverted[value].push(key);
+      } else {
+        inverted[value] = [key];
+      }
+    }
+  }
 
-	return inverted;
+  return inverted;
 }
