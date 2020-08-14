@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prepare": "cd src && node -r esm prepare.js"
+    "prepare": "cd src && node -r esm prepare.js",
+    "test": "jest"
   },
   "dependencies": {
     "core-js": "^3.6.5",
