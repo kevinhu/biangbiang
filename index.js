@@ -1,5 +1,5 @@
 export * from './src/module.js';
 
-var biangbiang = require("./src/module.js")
+import biangbiang from './src/module.js';
 
 export default biangbiang;
