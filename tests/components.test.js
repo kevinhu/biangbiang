@@ -1,9 +1,9 @@
-import { Components } from '../index';
+import biangbiang from '../index';
 
 test('decompose', () => {
-	console.log(JSON.stringify(Components.decompose('面'), null, 4));
+	console.log(JSON.stringify(biangbiang.Components.decompose('面'), null, 4));
 });
 
 test('charactersWithComponent', () => {
-	console.log(Components.charactersWithComponent('囗'));
+	console.log(biangbiang.Components.charactersWithComponent('囗'));
 });

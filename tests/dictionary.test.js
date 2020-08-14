@@ -1,14 +1,14 @@
-import { Dictionary } from '../index';
+import biangbiang from '../index';
 
 test('define', () => {
-	console.log(Dictionary.define('面条', 'simplified'));
+	console.log(biangbiang.Dictionary.define('面条', 'simplified'));
 });
 
 test('kind', () => {
-	console.log(Dictionary.kind('面'));
+	console.log(biangbiang.Dictionary.kind('面'));
 });
 
 test('wordsContaining', () => {
-	console.log(Dictionary.wordsContaining('面'));
+	console.log(biangbiang.Dictionary.wordsContaining('面'));
 });
 
