@@ -37,8 +37,5 @@
       "npx prettier --write",
       "eslint src/*.js --fix-dry-run"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   }
 }
