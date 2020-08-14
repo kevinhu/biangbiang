@@ -33,7 +33,7 @@ var biangbiang = require('biangbiang');
 Get the pinyin and definition of a word, where dictionary is "simplified", "traditional", or "merged". Also returns the frequency index (rank).
 
 ```javascript
-define('面条', 'simplified')
+define('面条', 'simplified');
 
 {
     simplified: '面条',
@@ -49,7 +49,7 @@ define('面条', 'simplified')
 Check if a character is a traditional or simplified one. If so, returns the other form. `type` is `1` for simplified, `2` for traditional, and `3` for both.
 
 ```{javascript}
-kind("面")
+kind("面");
 
 { type: 1, other: '麵'}
 ```
@@ -59,7 +59,7 @@ kind("面")
 Get a list of all dictionary words containing a character, sorted in order of decreasing frequency.
 
 ```javascript
-wordsContaining('面')
+wordsContaining('面');
 
 [
 	{
@@ -92,19 +92,118 @@ wordsContaining('面')
 
 Get frequency statistics for a character.
 
+```javascript
+characterFrequency('面');
+
+{
+	symbol: '面',
+	index: 211,
+	frequency: 1631866,
+	percentage: 0.0006532897206780486,
+	cumulativePercentage: 0.7101332080329651,
+}
+```
+
 ##### `wordFrequency(word)`
 
 Get frequency statistics for a word.
+
+```javascript
+wordFrequency('面条');
+
+{
+	symbol: '面条',
+	index: 6029,
+	frequency: 66879,
+	percentage: 0.000015823013308250793,
+	cumulativePercentage: 0.8864603725508198,
+}
+```
 
 ##### `multiFrequency(sentence)`
 
 Get frequency statistics for a body of text.
 
+```javascript
+multiFrequency('我喜欢吃面条。')
+
+{
+	byCharacter: [
+		{
+			symbol: '我',
+			index: 1,
+			frequency: 107133693,
+			percentage: 0.042889146765223256,
+			cumulativePercentage: 0.12608816399204145,
+		},
+		{
+			symbol: '喜',
+			index: 479,
+			frequency: 681772,
+			percentage: 0.0002729357921827617,
+			cumulativePercentage: 0.8216732504061582,
+		},
+		{
+			symbol: '欢',
+			index: 1490,
+			frequency: 140530,
+			percentage: 0.000056258788679270345,
+			cumulativePercentage: 0.9496496712024702,
+		},
+		{
+			symbol: '吃',
+			index: 42,
+			frequency: 9348265,
+			percentage: 0.0037424184526636244,
+			cumulativePercentage: 0.46991986609112824,
+		},
+		{
+			symbol: '面',
+			index: 211,
+			frequency: 1631866,
+			percentage: 0.0006532897206780486,
+			cumulativePercentage: 0.7101332080329651,
+		},
+		{
+			symbol: '条',
+			index: 169,
+			frequency: 2102653,
+			percentage: 0.0008417612665824651,
+			cumulativePercentage: 0.6785621013285376,
+		},
+		{
+			symbol: '。',
+			index: -1,
+			frequency: -1,
+			percentage: -1,
+			cumulativePercentage: -1,
+		},
+	],
+	indices: [1, 479, 1490, 42, 211, 169],
+	percentages: [
+		0.042889146765223256,
+		0.0002729357921827617,
+		0.000056258788679270345,
+		0.0037424184526636244,
+		0.0006532897206780486,
+		0.0008417612665824651,
+	],
+	cumulativePercentages: [
+		0.12608816399204145,
+		0.8216732504061582,
+		0.9496496712024702,
+		0.46991986609112824,
+		0.7101332080329651,
+		0.6785621013285376,
+	],
+}
+```
+
 #### Components
 
 ##### `decompose(character, depth)`
 
-Decompose a character into its components up to a specified depth. If depth is left undefined, then the full component tree is returned.
+Decompose a character into its components up to a specified depth. If depth is undefined, then the full component tree is returned.
 
 ##### `charactersWithComponent(component)`
 
