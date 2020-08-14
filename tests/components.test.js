@@ -1,9 +1,9 @@
 import { decompose, charactersWithComponent } from '../index';
 
 test('decompose', () => {
-	console.log(decompose('鸡'));
+	console.log(JSON.stringify(decompose('面'), null, 4));
 });
 
 test('charactersWithComponent', () => {
-	console.log(charactersWithComponent('鸟'));
+	console.log(charactersWithComponent('囗'));
 });

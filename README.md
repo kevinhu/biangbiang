@@ -63,26 +63,26 @@ wordsContaining('面');
 
 [
 	{
-	    word: '面',
-	    index: 322
+		word: '面',
+		index: 322,
 	},
 	{
-	    word: '里面',
-	    index: 706
+		word: '里面',
+		index: 706,
 	},
 	{
-	    word: '面对',
-	    index: 930
+		word: '面对',
+		index: 930,
 	},
 	{
-	    word: '外面',
-	    index: 1234
+		word: '外面',
+		index: 1234,
 	},
 	{
-	    word: '后面',
-	    index: 1270
-	}
-	...
+		word: '后面',
+		index: 1270,
+	},
+  ...
 ]
 ```
 
@@ -125,7 +125,7 @@ wordFrequency('面条');
 Get frequency statistics for a body of text.
 
 ```javascript
-multiFrequency('我喜欢吃面条。')
+multiFrequency('我喜欢吃面条。')；
 
 {
 	byCharacter: [
@@ -205,9 +205,55 @@ multiFrequency('我喜欢吃面条。')
 
 Decompose a character into its components up to a specified depth. If depth is undefined, then the full component tree is returned.
 
+```javascript
+decompose('面')；
+
+{
+	丆: {
+		'㇐': '㇐',
+		'㇓': '㇓',
+	},
+	囬: {
+		'55103': {
+			'10001': {
+				'10001': '㇑',
+			},
+			二: {
+				二: '㇐',
+			},
+		},
+		囗: {
+			'⺆': {
+				'㇑': '㇑',
+				'㇆': '㇆',
+			},
+			'㇐': '㇐',
+		},
+	},
+}
+```
+
 ##### `charactersWithComponent(component)`
 
 Get a list of characters containing a component, sorted in order of decreasing frequency.
+
+```javascript
+charactersWithComponent('囗')；
+
+[
+	{ character: '回', index: 139 },
+	{ character: '图', index: 166 },
+	{ character: '口', index: 307 },
+	{ character: '因', index: 381 },
+	{ character: '西', index: 382 },
+	{ character: '团', index: 388 },
+	{ character: '困', index: 413 },
+	{ character: '国', index: 544 },
+	{ character: '围', index: 644 },
+	{ character: '圈', index: 717 },
+  ...
+]
+```
 
 ## How it works
 
