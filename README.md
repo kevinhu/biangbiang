@@ -12,9 +12,57 @@ yarn add biangbiang
 ```
 ## Getting started
 
-### Import
+With `import`:
+
+```javascript
+import biangbiang from "biangbiang";
+```
+
+With `require`:
+
+```javascript
+var biangbiang = require('biangbiang');
+```
 
 ### Methods
+
+#### Dictionary
+
+##### `define(word, dictionary)`
+
+Get the pinyin and definition of a word, where dictionary is "simplified", "traditional", or "merged".
+
+##### `kind(character)`
+
+Check if a character is a traditional or simplified one.
+
+##### `wordsContaining(character)`
+
+Get a list of all dictionary words containing a character, sorted in order of decreasing frequency.
+
+#### Frequency
+
+##### `characterFrequency(character)`
+
+Get frequency statistics for a character.
+
+##### `wordFrequency(word)`
+
+Get frequency statistics for a word.
+
+##### `multiFrequency(sentence)`
+
+Get frequency statistics for a body of text.
+
+#### Components
+
+##### `decompose(character, depth)`
+
+Decompose a character into its components up to a specified depth. If depth is left undefined, then the full component tree is returned.
+
+##### `charactersWithComponent(component)`
+
+Get a list of characters containing a component, sorted in order of decreasing frequency.
 
 ## How it works
 
