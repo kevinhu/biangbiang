@@ -6,44 +6,51 @@ import * as componentsToCharacter from '../data/processed/componentsToCharacter.
 import { CharacterError } from './errors';
 
 /**
- * Get the component tree of a character or component.
- * @param {String} character
- * @param {int} depth
- * @return {Dictionary}
+ * Components wrapper class.
  */
-export function decompose(character, depth) {
-  if (!(character in components)) {
-    return { [character]: character };
-  }
-
-  let decomposition = components[character];
-
-  if (decomposition.length === 1 || depth === 0) {
-    if (decomposition[0] === '') {
-      return character;
+class Components {
+  /**
+   * Get the component tree of a character or component.
+   * @param {String} character
+   * @param {int} depth
+   * @return {Dictionary}
+   */
+  decompose(character, depth) {
+    if (!(character in components)) {
+      return { [character]: character };
     }
-    return { [character]: decomposition[0] };
+
+    let decomposition = components[character];
+
+    if (decomposition.length === 1 || depth === 0) {
+      if (decomposition[0] === '') {
+        return character;
+      }
+      return { [character]: decomposition[0] };
+    }
+
+    decomposition = decomposition.map((x) => [x, this.decompose(x, depth - 1)]);
+    decomposition = arrayToDict(decomposition);
+
+    return decomposition;
   }
 
-  decomposition = decomposition.map((x) => [x, decompose(x, depth - 1)]);
-  decomposition = arrayToDict(decomposition);
+  /**
+   * Get characters containing a component.
+   * @param {String} component
+   * @return {Array}
+   */
+  charactersWithComponent(component) {
+    if (component.length > 1) {
+      throw new CharacterError('Input is not a character', 404);
+    }
 
-  return decomposition;
+    if (component in componentsToCharacter) {
+      return componentsToCharacter[component];
+    } else {
+      return [];
+    }
+  }
 }
 
-/**
- * Get characters containing a component.
- * @param {String} component
- * @return {Array}
- */
-export function charactersWithComponent(component) {
-  if (component.length > 1) {
-    throw new CharacterError('Input is not a character', 404);
-  }
-
-  if (component in componentsToCharacter) {
-    return componentsToCharacter[component];
-  } else {
-    return [];
-  }
-}
+export default Components;

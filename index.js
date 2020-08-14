@@ -1,5 +1,12 @@
-export * from './src/module.js';
+import Dictionary from './src/dictionary'
+import Frequency from './src/frequency'
+import Components from './src/components'
 
-import biangbiang from './src/module.js';
+let biangbiang = {}
+biangbiang.Dictionary = new Dictionary();
+biangbiang.Components = new Components();
+biangbiang.Frequency = new Frequency();
 
-export default biangbiang;
+module.exports = biangbiang
+
+console.log(biangbiang.Dictionary.define('88','simplified'))

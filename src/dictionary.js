@@ -24,76 +24,83 @@ class DictionaryError extends Error {
 }
 
 /**
- * Get the definition of a word.
- * @param {String} word
- * @param {String} dictionary Dictionary to use; "simplified", "traditional", or "merged"
- * @return {Dictionary}
+ * Dictionary wrapper class.
  */
-export function define(word, dictionary) {
-  let selectedDictionary;
+class Dictionary {
+  /**
+   * Get the definition of a word.
+   * @param {String} word
+   * @param {String} dictionary Dictionary to use; "simplified", "traditional", or "merged"
+   * @return {Dictionary}
+   */
+  define(word, dictionary) {
+    let selectedDictionary;
 
-  switch (dictionary) {
-    case 'simplified':
-      selectedDictionary = simplifiedDictionary;
+    switch (dictionary) {
+      case 'simplified':
+        selectedDictionary = simplifiedDictionary;
 
-      break;
+        break;
 
-    case 'traditional':
-      selectedDictionary = traditionalDictionary;
-      break;
+      case 'traditional':
+        selectedDictionary = traditionalDictionary;
+        break;
 
-    case 'merged':
-      selectedDictionary = mergedDictionary;
-      break;
+      case 'merged':
+        selectedDictionary = mergedDictionary;
+        break;
 
-    default:
-      throw new DictionaryError(
-        "Dictionary must be 'simplified', 'traditional', or 'merged'",
-        404,
-      );
+      default:
+        throw new DictionaryError(
+          "Dictionary must be 'simplified', 'traditional', or 'merged'",
+          404,
+        );
+    }
+
+    if (word in selectedDictionary) {
+      return selectedDictionary[word];
+    } else {
+      return {
+        simplified: -1,
+        traditional: -1,
+        pinyin: -1,
+        definition: -1,
+      };
+    }
   }
 
-  if (word in selectedDictionary) {
-    return selectedDictionary[word];
-  } else {
-    return {
-      simplified: -1,
-      traditional: -1,
-      pinyin: -1,
-      definition: -1,
-    };
+  /**
+   * Get whether a character is traditional, simplified, or both.
+   * @param {String} character
+   * @return {Dictionary}
+   */
+  kind(character) {
+    if (character in simplifiedTraditional) {
+      return simplifiedTraditional[character];
+    } else {
+      return {
+        type: -1,
+        other: '',
+      };
+    }
+  }
+
+  /**
+   * Get words containing a character.
+   * @param {String} character
+   * @return {Array}
+   */
+  wordsContaining(character) {
+    if (character.length > 1) {
+      throw new CharacterError('Input is not a character', 404);
+    }
+
+    if (character in charToWords) {
+      return charToWords[character];
+    } else {
+      return [];
+    }
   }
 }
 
-/**
- * Get whether a character is traditional, simplified, or both.
- * @param {String} character
- * @return {Dictionary}
- */
-export function kind(character) {
-  if (character in simplifiedTraditional) {
-    return simplifiedTraditional[character];
-  } else {
-    return {
-      type: -1,
-      other: '',
-    };
-  }
-}
-
-/**
- * Get words containing a character.
- * @param {String} character
- * @return {Array}
- */
-export function wordsContaining(character) {
-  if (character.length > 1) {
-    throw new CharacterError('Input is not a character', 404);
-  }
-
-  if (character in charToWords) {
-    return charToWords[character];
-  } else {
-    return [];
-  }
-}
+export default Dictionary;

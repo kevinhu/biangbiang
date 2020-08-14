@@ -1,14 +1,14 @@
-import { define, kind, wordsContaining } from '../index';
+import { Dictionary } from '../index';
 
 test('define', () => {
-	console.log(define('面条', 'simplified'));
+	console.log(Dictionary.define('面条', 'simplified'));
 });
 
 test('kind', () => {
-	console.log(kind('面'));
+	console.log(Dictionary.kind('面'));
 });
 
 test('wordsContaining', () => {
-	console.log(wordsContaining('面'));
+	console.log(Dictionary.wordsContaining('面'));
 });
 
