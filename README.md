@@ -1,5 +1,10 @@
 # biangbiang
-Chinese NLP utilities
+
+This package provides methods for Chinese language analysis and exploration in Node.js. In particular, it provides three broad functions:
+
+1. Dictionary definitions of words
+2. Retrieval and calculation of character and word frequency statistics
+3. Hierarchical decomposition of characters into components
 
 ## Installation
 For npm:
@@ -269,3 +274,10 @@ The preparation script can also be run with `npm run prepare` or `yarn prepare`.
 
 This project was inspired by [HanziJS](https://github.com/nieldlr/hanzi) and offers many of the same functionalities.
 
+## Etymology
+
+Biangbiang noodles are a common cuisine in China's Shaanxi province. The character for 'biáng' is one of the most complicated in modern usage. Ironically, is not (yet) included in any of our datasets, as the character was only added to Unicode in March of 2020.
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bi%C3%A1ng_%28regular_script%29.svg/120px-Bi%C3%A1ng_%28regular_script%29.svg.png">
+</p>
