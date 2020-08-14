@@ -30,15 +30,61 @@ var biangbiang = require('biangbiang');
 
 ##### `define(word, dictionary)`
 
-Get the pinyin and definition of a word, where dictionary is "simplified", "traditional", or "merged".
+Get the pinyin and definition of a word, where dictionary is "simplified", "traditional", or "merged". Also returns the frequency index (rank).
+
+```javascript
+define('面条', 'simplified')
+
+{
+    simplified: '面条',
+    traditional: '麵條',
+    pinyin: 'mian4 tiao2',
+    definition: 'noodles',
+    index: 6029
+}
+```
 
 ##### `kind(character)`
 
-Check if a character is a traditional or simplified one.
+Check if a character is a traditional or simplified one. If so, returns the other form. `type` is `1` for simplified, `2` for traditional, and `3` for both.
+
+```{javascript}
+kind("面")
+
+{ type: 1, other: '麵'}
+```
 
 ##### `wordsContaining(character)`
 
 Get a list of all dictionary words containing a character, sorted in order of decreasing frequency.
+
+```javascript
+wordsContaining('面')
+
+[
+	{
+	    word: '面',
+	    index: 322
+	},
+	{
+	    word: '里面',
+	    index: 706
+	},
+	{
+	    word: '面对',
+	    index: 930
+	},
+	{
+	    word: '外面',
+	    index: 1234
+	},
+	{
+	    word: '后面',
+	    index: 1270
+	}
+	...
+]
+```
 
 #### Frequency
 
