@@ -189,6 +189,17 @@ function makeCharToWords(words, frequencies) {
     let words = charToWords[key];
 
     words = words.sort(function (a, b) {
+      if (a.index === -1 && b.index === -1) {
+        return 0;
+      }
+
+      if (a.index === -1) {
+        return 1;
+      }
+      if (b.index === -1) {
+        return -1;
+      }
+
       return a.index > b.index ? 1 : b.index > a.index ? -1 : 0;
     });
 
@@ -347,6 +358,17 @@ Object.keys(componentsToCharacter).map(function (key) {
   });
 
   indexedCharacters = indexedCharacters.sort(function (a, b) {
+    if (a.index === -1 && b.index === -1) {
+      return 0;
+    }
+
+    if (a.index === -1) {
+      return 1;
+    }
+    if (b.index === -1) {
+      return -1;
+    }
+
     return a.index > b.index ? 1 : b.index > a.index ? -1 : 0;
   });
 
