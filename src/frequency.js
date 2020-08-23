@@ -1,5 +1,5 @@
-import * as wordFreqs from '../data/processed/wordFreqs.json';
-import * as charFreqs from '../data/processed/charFreqs.json';
+import wordFreqs from '../data/processed/wordFreqs.json';
+import charFreqs from '../data/processed/charFreqs.json';
 
 import { CharacterError } from './errors';
 

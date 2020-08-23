@@ -1,10 +1,10 @@
-import * as simplifiedDictionary from '../data/processed/simplifiedDictionary.json';
-import * as traditionalDictionary from '../data/processed/traditionalDictionary.json';
-import * as mergedDictionary from '../data/processed/mergedDictionary.json';
+import simplifiedDictionary from '../data/processed/simplifiedDictionary.json';
+import traditionalDictionary from '../data/processed/traditionalDictionary.json';
+import mergedDictionary from '../data/processed/mergedDictionary.json';
 
-import * as charToWords from '../data/processed/charToWords.json';
+import charToWords from '../data/processed/charToWords.json';
 
-import * as simplifiedTraditional from '../data/processed/simplifiedTraditional.json';
+import simplifiedTraditional from '../data/processed/simplifiedTraditional.json';
 
 import { CharacterError } from './errors';
 

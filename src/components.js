@@ -1,7 +1,7 @@
 import { arrayToDict } from './utils';
 
-import * as components from '../data/processed/components.json';
-import * as componentsToCharacter from '../data/processed/componentsToCharacter.json';
+import components from '../data/processed/components.json';
+import componentsToCharacter from '../data/processed/componentsToCharacter.json';
 
 import { CharacterError } from './errors';
 
