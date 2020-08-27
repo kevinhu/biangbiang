@@ -3,6 +3,8 @@
   "version": "0.1.4",
   "main": "index.js",
   "license": "MIT",
+  "repository": "kevinhu/biangbiang",
+  "homepage": "https://github.com/kevinhu/biangbiang",
   "scripts": {
     "prepare": "cd src && node -r esm prepare.js",
     "test": "jest"
