@@ -12,7 +12,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "esm": "^3.2.25",
-    "jsonfile": "^6.0.1",
+    "jsonfile": "^6.1.0",
     "legacy-encoding": "^3.0.0",
     "read-file": "^0.2.0"
   },
