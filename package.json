@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "core-js": "^3.15.1",
+    "core-js": "^3.15.2",
     "esm": "^3.2.25",
     "jsonfile": "^6.1.0",
     "legacy-encoding": "^3.0.0",
@@ -23,7 +23,7 @@
     "eslint": "^7.28.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.0",
     "jest": "^27.0.5",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.1",
