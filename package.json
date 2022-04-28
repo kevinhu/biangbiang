@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "core-js": "^3.16.3",
+    "core-js": "^3.22.3",
     "esm": "^3.2.25",
     "jsonfile": "^6.1.0",
     "legacy-encoding": "^3.0.0",
